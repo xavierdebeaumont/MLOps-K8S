@@ -29,16 +29,13 @@ jobs:
         with:
           version: '327.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # Set the GCP service account key as a secret in your repository
-      
-      - name: Set up GCP Project_ID
+
+      - name: Install and configure Google Cloud SDK
         run: |
           gcloud config set project "${{ env.PROJECT_ID }}"
-
-      - name: Configure Docker for GCR authentication
-        env:
-          REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
-        run: |
-          gcloud auth configure-docker "${{ env.REGISTRY_LOCATION }}"
+          gcloud auth configure-docker "gcr.io/${{ env.PROJECT_ID }}"
+          gcloud components update
+          gcloud components install kubectl
 
       - name: Build and push Docker image to Google Container Registry (GCR)
         env:
