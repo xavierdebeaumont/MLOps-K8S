@@ -32,12 +32,14 @@ jobs:
 
       - name: Configure Docker for GCR authentication
         env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
           REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
         run: |
           gcloud auth configure-docker "${{ env.REGISTRY_LOCATION }}"
 
       - name: Build and push Docker image to Google Container Registry (GCR)
         env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
           REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
           IMAGE_TAG: v1
         run: |
