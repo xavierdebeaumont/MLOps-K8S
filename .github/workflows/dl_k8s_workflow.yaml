@@ -30,7 +30,7 @@ jobs:
           version: '327.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # Set the GCP service account key as a secret in your repository
       
-      -name: Set up GCP Project_ID
+      - name: Set up GCP Project_ID
         run: |
           gcloud config set project "${{ env.PROJECT_ID }}"
 
