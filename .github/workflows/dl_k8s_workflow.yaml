@@ -16,6 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+        
+      - name: Print Project ID
+        run: echo $PROJECT_ID
+
 
       - name: Checkout repository
         uses: actions/checkout@v2
