@@ -32,7 +32,7 @@ jobs:
       
       -name: Set up GCP Project_ID
         run: |
-          gcloud config set project $PROJECT_ID
+          gcloud config set project "${{ env.PROJECT_ID }}"
 
       - name: Configure Docker for GCR authentication
         env:
