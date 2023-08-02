@@ -31,7 +31,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # Set the GCP service account key as a secret in your repository
       
       -name: Set up GCP Project_ID
-        run:
+        run: |
           gcloud config set project $PROJECT_ID
 
       - name: Configure Docker for GCR authentication
