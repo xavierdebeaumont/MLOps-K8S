@@ -12,7 +12,7 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 st.title("Location Image Classifier")
 st.text("Provide URL of Location Image for image classification")
 
-@st.cache(allow_output_mutation=True)
+@st.cache_data
 def load_model():
   model = tf.keras.models.load_model('/app/models/')
   return model
@@ -27,7 +27,7 @@ def decode_img(image):
   img = tf.image.resize(img,[150,150])
   return np.expand_dims(img, axis=0)
 
-path = st.text_input('Enter Image URL to Classify.. ','https://storage.googleapis.com/your_image.JPEG')
+path = st.text_input('Enter Image URL to Classify.. ','https://th.bing.com/th/id/R.8014731bbd5a6b57fa772fccb8653038?rik=%2fp%2bNCzs5UuBaug&riu=http%3a%2f%2fwonderfulengineering.com%2fwp-content%2fuploads%2f2014%2f01%2fbuilding-wallpaper.jpeg&ehk=Y6e8DJu5l31WDk1f5XrN%2biuqOrXdC%2fZvh7MMWsbzOc0%3d&risl=&pid=ImgRaw&r=0')
 if path is not None:
     content = requests.get(path).content
 
