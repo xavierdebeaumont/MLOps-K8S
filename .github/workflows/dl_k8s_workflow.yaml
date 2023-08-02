@@ -16,10 +16,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-        
-      - name: Print Project ID
-        run: echo $PROJECT_ID
-
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -33,17 +29,19 @@ jobs:
         with:
           version: '327.0.0'
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # Set the GCP service account key as a secret in your repository
+      
+      -name: Set up GCP Project_ID
+        run:
+          gcloud config set project $PROJECT_ID
 
       - name: Configure Docker for GCR authentication
         env:
-          PROJECT_ID: ${{ env.PROJECT_ID }}
           REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
         run: |
           gcloud auth configure-docker "${{ env.REGISTRY_LOCATION }}"
 
       - name: Build and push Docker image to Google Container Registry (GCR)
         env:
-          PROJECT_ID: ${{ env.PROJECT_ID }}
           REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
           IMAGE_TAG: v1
         run: |
@@ -51,7 +49,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         env:
-          PROJECT_ID: ${{ env.PROJECT_ID }}
           CLUSTER_NAME: mykube
           LOCATION: europe-west9
         run: |
