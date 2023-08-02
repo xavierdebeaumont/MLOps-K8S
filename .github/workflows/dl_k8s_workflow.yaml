@@ -8,6 +8,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID_SECRET }}
 
     steps:
       - name: Set up Node.js 16
@@ -29,6 +31,8 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}  # Set the GCP service account key as a secret in your repository
 
       - name: Configure Docker for GCR authentication
+        env:
+          REGISTRY_LOCATION: gcr.io/${{ env.PROJECT_ID }}
         run: |
           gcloud auth configure-docker "${{ env.REGISTRY_LOCATION }}"
 
