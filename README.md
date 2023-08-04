@@ -32,8 +32,8 @@ This Dataset contains around 25k images of size 150x150 distributed under 6 cate
 ![moutain](images/building.png)
 
 ## Setup 
-- Run the model_train.ipynb notebook in Google Colab.
-- Store the model weights in the /models folder.
+- Run the model_train.ipynb notebook in Google Colab. (Optional)
+- Store the model weights in the /models folder. (Optional)
 - Indicate your GCP project in the deployment.yaml for Kubernetes.
 - Ensure you have the APIs activated and the right permissions for your cloud role.
 - Launch the Kubernetes cluster from the Google Cloud Shell using the command: 
@@ -49,4 +49,5 @@ Now the application should be automatically deployed to your GKE instance. Go to
 ## Improvement
 - Store the models weights and access it through google cloud storage.
 - Implement testing and monitoring.
+- Experiment tracking with W&B.
 
